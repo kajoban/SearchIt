@@ -3,13 +3,18 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {addData} from '../actions/index';
 
+function mapDispatchToProps(dispatch){
+    return{
+        addData: data => dispatch(addData(data))
+    };
+}
+
 class SearchBox extends React.Component{
 
     constructor(){
         super();
         this.state = {
             searchTerm: '',
-            data: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -19,7 +24,6 @@ class SearchBox extends React.Component{
         this.setState({
             searchTerm: event.target.value
         })
-        console.log(this.state.searchTerm);
     }
 
     handleSubmit(event){
@@ -28,10 +32,7 @@ class SearchBox extends React.Component{
         axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json`)
             .then((response) => {
                 let comments = response.data.data.children
-                this.setState({
-                    data: comments
-                })
-                console.log(this.state.data)
+                this.props.addData(comments);
             })
             .catch((error) => {
                 console.log(error)
@@ -50,4 +51,6 @@ class SearchBox extends React.Component{
     }
 }
 
-export default SearchBox;
+const ConnectedSearchBox = connect(null, mapDispatchToProps)(SearchBox);
+
+export default ConnectedSearchBox;
