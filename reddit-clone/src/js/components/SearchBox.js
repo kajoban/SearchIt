@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class SearchBox extends React.Component{
 
@@ -15,11 +16,19 @@ class SearchBox extends React.Component{
         this.setState({
             searchTerm: event.target.value
         })
+        console.log(this.state.searchTerm);
     }
 
     handleSubmit(event){
-        console.log(this.state.searchTerm)
         event.preventDefault();
+        console.log(this.state.searchTerm);
+        axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json`)
+            .then(function(response){
+                console.log(response);
+            })
+            .catch(function(error){
+                console.log(error)
+            });
     }
 
     render(){
