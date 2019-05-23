@@ -34,6 +34,8 @@ class SearchBox extends React.Component{
             })
             .catch((error) => {
                 console.log(error)
+                let comments = [];
+                this.props.addData(comments);
             });
     }
 

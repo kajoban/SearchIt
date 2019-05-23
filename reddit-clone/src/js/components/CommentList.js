@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Comment from './Comment'
-import uuidv4 from 'uuid/v4'
+import Comment from './Comment';
+import Error from './Error';
+import uuidv4 from 'uuid/v4';
 
 const mapStateToProps = (state) => { //there is a problem here
     console.log('this is the state in comment list')
@@ -12,6 +13,11 @@ const mapStateToProps = (state) => { //there is a problem here
 }
 
 const List = (props) => {
+    if(props.data.length == 0){
+        return(
+            <Error/>
+        )
+    }
     return (
         props.data.map(
             (child) =>
