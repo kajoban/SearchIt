@@ -2,15 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Comment from './Comment'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { //there is a problem here
+    console.log('this is the state in comment list')
+    console.log(state.data);
     return {
         data: state.data
     }
 }
 
-const List = ({ data }) => {
+const List = (props) => {
     return (
-        data.map(
+        props.data.map(
             (child) =>
                 <Comment child={child} />
         )

@@ -5,14 +5,13 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
-    console.log(action);
     switch(action.type){
         case ADD_DATA:
             return {
                 data: action.data
             }
         default:
-            return {...state}
+            return state
     }
 }
 

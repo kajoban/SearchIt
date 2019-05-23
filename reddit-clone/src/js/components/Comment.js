@@ -4,7 +4,7 @@ const Comment = (props) => {
     return(
         <div>
             <div>
-                <p>{props}</p>
+                <p>{props.child.data.title}</p>
             </div>
         </div>
     )
