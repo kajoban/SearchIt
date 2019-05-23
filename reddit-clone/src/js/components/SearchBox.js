@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {addData} from '../actions/index';
 
-const mapDispatchToProps = (dispatch) => ({ //theres a problem here
+const mapDispatchToProps = (dispatch) => ({ 
     addData: data => dispatch(addData(data))
 })
 
@@ -30,7 +30,6 @@ class SearchBox extends React.Component{
         axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json`)
             .then((response) => {
                 let comments = response.data.data.children;
-                console.log(comments);
                 this.props.addData(comments);
             })
             .catch((error) => {
