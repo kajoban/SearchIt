@@ -13,9 +13,12 @@ class SearchBox extends React.Component{
         super();
         this.state = {
             searchTerm: '',
+            sort:''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        this.makeLink = this.makeLink.bind(this);
     }
 
     handleChange(event){
@@ -24,10 +27,16 @@ class SearchBox extends React.Component{
         })
     }
 
+    handleDropdownChange(event){
+        this.setState({
+            sort: event.target.value
+        })
+    }
+
     handleSubmit(event){
         event.preventDefault();
         console.log(this.state.searchTerm);
-        axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json?sort=top`)
+        axios.get(this.makeLink())
             .then((response) => {
                 let comments = response.data.data.children;
                 this.props.addData(comments);
@@ -39,15 +48,21 @@ class SearchBox extends React.Component{
             });
     }
 
-    // setLink(filter){
-    //     return `http://www.reddit.com/user/${this.state.searchTerm}/overview/.json?sort=${filter}`
-    // }
+    makeLink(){
+        return `http://www.reddit.com/user/${this.state.searchTerm}/overview/.json?sort=${this.state.sort}`
+    }
 
     render(){
         return(
             <div>
+                <input type='text' value={this.state.searchTerm} onChange={this.handleChange}></input>
+                <select defaultValue='hot' onChange={this.handleDropdownChange}>    
+                    <option value='hot'>hot</option>
+                    <option value='new'>new</option>
+                    <option value='top'>top</option>
+                    <option value='controversial'>controversial</option>
+                </select>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='text' value={this.state.searchTerm} onChange={this.handleChange}></input>
                     <input type='submit'></input>
                 </form>
             </div>
