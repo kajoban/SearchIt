@@ -27,7 +27,7 @@ class SearchBox extends React.Component{
     handleSubmit(event){
         event.preventDefault();
         console.log(this.state.searchTerm);
-        axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json`)
+        axios.get(`http://www.reddit.com/user/${this.state.searchTerm}/overview/.json?sort=top`)
             .then((response) => {
                 let comments = response.data.data.children;
                 this.props.addData(comments);
@@ -38,6 +38,10 @@ class SearchBox extends React.Component{
                 this.props.addData(comments);
             });
     }
+
+    // setLink(filter){
+    //     return `http://www.reddit.com/user/${this.state.searchTerm}/overview/.json?sort=${filter}`
+    // }
 
     render(){
         return(

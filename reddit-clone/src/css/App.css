@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+.fas{
+  color: rgb(255, 69, 0)
+}
+
+.comment{
+  margin: 1% 20% 1% 20%;
+}
