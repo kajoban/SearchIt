@@ -63,20 +63,20 @@ class SearchBox extends React.Component{
     render(){
         return(
             <div>
-                <input type='text' value={this.state.searchTerm} onChange={this.handleChange}></input>
-                <select defaultValue='hot' onChange={this.handleSortDropdownChange}>    
+                <input type='text' className='boxMargin' value={this.state.searchTerm} onChange={this.handleChange}></input>
+                <select className='boxMargin' defaultValue='hot' onChange={this.handleSortDropdownChange}>    
                     <option value='hot'>hot</option>
                     <option value='new'>new</option>
                     <option value='top'>top</option>
                     <option value='controversial'>controversial</option>
                 </select>
-                <select defaultValue='25' onChange={this.handleLimitDropdownChange}>    
+                <select className='boxMargin' defaultValue='25' onChange={this.handleLimitDropdownChange}>    
                     <option value='25'>25</option>
                     <option value='50'>50</option>
                     <option value='100'>100</option>
                 </select>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='submit'></input>
+                    <input type='submit' class="btn btn-outline-success boxMargin"></input>
                 </form>
             </div>
         )
